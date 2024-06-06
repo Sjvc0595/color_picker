@@ -29,6 +29,7 @@ class BluetoothService extends ChangeNotifier {
   BluetoothState get bluetoothState => _bluetoothState;
   bool get isConnected => _isConnected;
   List<BluetoothDevice> get devicesList => _devicesList;
+  bool get isBluetoothAvailable => _bluetoothState == BluetoothState.STATE_ON;
 
   Future<void> discoverDevices() async {
     try {
@@ -79,5 +80,13 @@ class BluetoothService extends ChangeNotifier {
       _isConnected = false;
       notifyListeners();
     });
+  }
+
+  Future<void> enableBluetooth() async {
+    try {
+      await _flutterBluetooth.requestEnable();
+    } catch (e) {
+      rethrow;
+    }
   }
 }
