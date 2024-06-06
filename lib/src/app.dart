@@ -8,6 +8,7 @@ import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
 import 'views/data_view.dart';
+import 'views/bluetooth_settings_view.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -62,6 +63,8 @@ class MyApp extends StatelessWidget {
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
+          debugShowCheckedModeBanner: false,
+
           // Define a function to handle named routes in order to support
           // Flutter web url navigation and deep linking.
           onGenerateRoute: (RouteSettings routeSettings) {
@@ -69,15 +72,19 @@ class MyApp extends StatelessWidget {
               settings: routeSettings,
               builder: (BuildContext context) {
                 switch (routeSettings.name) {
+                  case BluetoothSettingsView.routeName:
+                    return const BluetoothSettingsView();
                   case DataView.routeName:
-                    return const DataView();
-                  case SettingsView.routeName:
-                    return SettingsView(controller: settingsController);
-                  case SampleItemDetailsView.routeName:
-                    return const SampleItemDetailsView();
-                  case SampleItemListView.routeName:
                   default:
-                    return const SampleItemListView();
+                    return const DataView();
+
+                  // case SettingsView.routeName:
+                  //   return SettingsView(controller: settingsController);
+                  // case SampleItemDetailsView.routeName:
+                  //   return const SampleItemDetailsView();
+                  // case SampleItemListView.routeName:
+                  // default:
+                  //   return const SampleItemListView();
                 }
               },
             );
