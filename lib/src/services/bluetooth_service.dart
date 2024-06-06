@@ -73,6 +73,7 @@ class BluetoothService extends ChangeNotifier {
 
   void _handleIncomingData() {
     _bluetoothConnection!.input!.listen((data) {
+      // ignore: unused_local_variable
       String receivedData = String.fromCharCodes(data).trim();
     }).onDone(() {
       _isConnected = false;
