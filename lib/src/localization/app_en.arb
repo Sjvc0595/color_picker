@@ -1,0 +1,6 @@
+{
+  "appTitle": "color_picker",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
