@@ -56,10 +56,6 @@ class _BluetoothSettingsViewState extends State<BluetoothSettingsView> {
     }
   }
 
-  void _openAppSettings() {
-    openAppSettings();
-  }
-
   @override
   Widget build(BuildContext context) {
     final bluetoothService = Provider.of<BluetoothService>(context);
