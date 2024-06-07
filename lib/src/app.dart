@@ -74,12 +74,12 @@ class MyApp extends StatelessWidget {
                 switch (routeSettings.name) {
                   case BluetoothSettingsView.routeName:
                     return const BluetoothSettingsView();
+                  case SettingsView.routeName:
+                    return SettingsView(controller: settingsController);
                   case DataView.routeName:
                   default:
                     return const DataView();
 
-                  // case SettingsView.routeName:
-                  //   return SettingsView(controller: settingsController);
                   // case SampleItemDetailsView.routeName:
                   //   return const SampleItemDetailsView();
                   // case SampleItemListView.routeName:

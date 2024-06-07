@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/bluetooth_service.dart';
 import 'bluetooth_settings_view.dart';
+import '../settings/settings_view.dart';
 
 import 'package:permission_handler/permission_handler.dart';
 
@@ -37,11 +38,17 @@ class _DataViewState extends State<DataView> {
         title: const Text('Data'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.bluetooth),
             onPressed: () {
               Navigator.restorablePushNamed(
                   context, BluetoothSettingsView.routeName);
             },
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.restorablePushNamed(context, SettingsView.routeName);
+            },
+            icon: const Icon(Icons.settings),
           ),
         ],
       ),
