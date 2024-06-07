@@ -106,35 +106,50 @@ class _DevicesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(
-          child: RefreshIndicator(
-            onRefresh: () async {
-              await bluetoothService.discoverDevices();
-            },
-            child: ListView.builder(
-              itemCount: bluetoothService.devicesList.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                      bluetoothService.devicesList[index].name ?? "Unknown"),
-                  subtitle: Text(bluetoothService.devicesList[index].address),
-                  onTap: () async {
-                    try {
-                      await bluetoothService
-                          .connect(bluetoothService.devicesList[index]);
-                    } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(e.toString()),
-                        ),
-                      );
-                    }
-                  },
-                );
+        if (bluetoothService.isConnecting) const LinearProgressIndicator(),
+        if (bluetoothService.isConnected)
+          Column(
+            children: [
+              Text(
+                  "Conectado a: ${bluetoothService.connectedDevice?.name ?? bluetoothService.connectedDevice?.address}"),
+              ElevatedButton(
+                onPressed: () async {
+                  await bluetoothService.disconnect();
+                },
+                child: const Text("Desconectar"),
+              ),
+            ],
+          ),
+        if (!bluetoothService.isConnected)
+          Expanded(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await bluetoothService.discoverDevices();
               },
+              child: ListView.builder(
+                itemCount: bluetoothService.devicesList.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                        bluetoothService.devicesList[index].name ?? "Unknown"),
+                    subtitle: Text(bluetoothService.devicesList[index].address),
+                    onTap: () async {
+                      try {
+                        await bluetoothService
+                            .connect(bluetoothService.devicesList[index]);
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(e.toString()),
+                          ),
+                        );
+                      }
+                    },
+                  );
+                },
+              ),
             ),
           ),
-        ),
         const Text(
             "Si no ves ningún dispositivo, comprueba los dispositivos enlazados en ajustes"),
       ],
