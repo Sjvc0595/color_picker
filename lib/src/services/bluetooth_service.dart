@@ -11,7 +11,9 @@ class BluetoothService extends ChangeNotifier {
   BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
   BluetoothConnection? _bluetoothConnection;
   bool _isConnected = false;
+  bool _isConnecting = false;
   List<BluetoothDevice> _devicesList = [];
+  BluetoothDevice? _connectedDevice;
 
   BluetoothService() {
     _flutterBluetooth.state.then((value) {
@@ -30,6 +32,8 @@ class BluetoothService extends ChangeNotifier {
   bool get isConnected => _isConnected;
   List<BluetoothDevice> get devicesList => _devicesList;
   bool get isBluetoothAvailable => _bluetoothState == BluetoothState.STATE_ON;
+  bool get isConnecting => _isConnecting;
+  BluetoothDevice? get connectedDevice => _connectedDevice;
 
   Future<void> discoverDevices() async {
     try {
@@ -43,15 +47,21 @@ class BluetoothService extends ChangeNotifier {
   }
 
   Future<void> connect(BluetoothDevice device) async {
+    _isConnecting = true;
+    notifyListeners();
     try {
       await BluetoothConnection.toAddress(device.address).then((value) {
         _bluetoothConnection = value;
         _isConnected = true;
+        _connectedDevice = device;
         notifyListeners();
         _handleIncomingData();
       });
     } catch (e) {
       rethrow;
+    } finally {
+      _isConnecting = false;
+      notifyListeners();
     }
   }
 
