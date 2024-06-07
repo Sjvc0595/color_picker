@@ -113,8 +113,8 @@ class _DataViewState extends State<DataView> {
             const Text('Data View'),
             const Text("Color elegido:"),
             SizedBox(
-              width: 100,
-              height: 100,
+              width: 300,
+              height: 300,
               child: Container(
                 color: _currentColor,
               ),
