@@ -5,6 +5,7 @@ import 'bluetooth_settings_view.dart';
 import '../settings/settings_view.dart';
 
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class DataView extends StatefulWidget {
   const DataView({super.key});
@@ -21,6 +22,57 @@ class _DataViewState extends State<DataView> {
     await Permission.bluetooth.request();
     await Permission.bluetoothScan.request();
     await Permission.bluetoothConnect.request();
+  }
+
+  Color _currentColor = Colors.blue;
+
+  void _selectColor() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Selecciona un color'),
+          content: ColorPicker(
+            pickerColor: _currentColor,
+            hexInputBar: true,
+            labelTypes: const [ColorLabelType.rgb, ColorLabelType.hex],
+            enableAlpha: false,
+            onColorChanged: (color) {
+              setState(() {
+                _currentColor = color;
+              });
+              final bluetoothService =
+                  Provider.of<BluetoothService>(context, listen: false);
+              if (bluetoothService.isConnected) {
+                bluetoothService
+                    .sendData(color.value.toRadixString(16).padLeft(8, '0'));
+              }
+            },
+            pickerAreaHeightPercent: 0.8,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                final bluetoothService =
+                    Provider.of<BluetoothService>(context, listen: false);
+                if (bluetoothService.isConnected) {
+                  bluetoothService.sendData(
+                      _currentColor.value.toRadixString(16).padLeft(8, '0'));
+                }
+                Navigator.of(context).pop();
+              },
+              child: const Text('Aceptar'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -59,6 +111,18 @@ class _DataViewState extends State<DataView> {
                 ? "Estás conectado"
                 : "No estás conectado"),
             const Text('Data View'),
+            const Text("Color elegido:"),
+            SizedBox(
+              width: 100,
+              height: 100,
+              child: Container(
+                color: _currentColor,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: _selectColor,
+              child: const Text("Selecciona un color nuevo"),
+            )
           ],
         ),
       ),
