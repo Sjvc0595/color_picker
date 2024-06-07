@@ -119,8 +119,16 @@ class _DevicesList extends StatelessWidget {
                       bluetoothService.devicesList[index].name ?? "Unknown"),
                   subtitle: Text(bluetoothService.devicesList[index].address),
                   onTap: () async {
-                    await bluetoothService
-                        .connect(bluetoothService.devicesList[index]);
+                    try {
+                      await bluetoothService
+                          .connect(bluetoothService.devicesList[index]);
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(e.toString()),
+                        ),
+                      );
+                    }
                   },
                 );
               },
