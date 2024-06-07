@@ -7,6 +7,8 @@ import '../settings/settings_view.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
+import 'dart:async';
+
 class DataView extends StatefulWidget {
   const DataView({super.key});
 
@@ -25,6 +27,7 @@ class _DataViewState extends State<DataView> {
   }
 
   Color _currentColor = Colors.blue;
+  Timer? _debounce;
 
   void _selectColor() {
     showDialog(
@@ -41,12 +44,16 @@ class _DataViewState extends State<DataView> {
               setState(() {
                 _currentColor = color;
               });
-              final bluetoothService =
-                  Provider.of<BluetoothService>(context, listen: false);
-              if (bluetoothService.isConnected) {
-                bluetoothService
-                    .sendData(color.value.toRadixString(16).padLeft(8, '0'));
-              }
+
+              if (_debounce?.isActive ?? false) _debounce!.cancel();
+              _debounce = Timer(const Duration(milliseconds: 300), () {
+                final bluetoothService =
+                    Provider.of<BluetoothService>(context, listen: false);
+                if (bluetoothService.isConnected) {
+                  bluetoothService
+                      .sendData(color.value.toRadixString(16).padLeft(8, '0'));
+                }
+              });
             },
             pickerAreaHeightPercent: 0.8,
           ),
@@ -122,7 +129,28 @@ class _DataViewState extends State<DataView> {
             ElevatedButton(
               onPressed: _selectColor,
               child: const Text("Selecciona un color nuevo"),
-            )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    if (bluetoothService.isConnected) {
+                      bluetoothService.sendData("1");
+                    }
+                  },
+                  child: const Text("Encender"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (bluetoothService.isConnected) {
+                      bluetoothService.sendData("0");
+                    }
+                  },
+                  child: const Text("Apagar"),
+                ),
+              ],
+            ),
           ],
         ),
       ),
