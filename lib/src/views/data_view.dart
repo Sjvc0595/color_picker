@@ -29,6 +29,10 @@ class _DataViewState extends State<DataView> {
   Color _currentColor = Colors.blue;
   Timer? _debounce;
 
+  String _colorToHex(Color color) {
+    return color.value.toRadixString(16).padLeft(8, '0').substring(2);
+  }
+
   void _selectColor() {
     showDialog(
       context: context,
@@ -50,8 +54,7 @@ class _DataViewState extends State<DataView> {
                 final bluetoothService =
                     Provider.of<BluetoothService>(context, listen: false);
                 if (bluetoothService.isConnected) {
-                  bluetoothService
-                      .sendData(color.value.toRadixString(16).padLeft(8, '0'));
+                  bluetoothService.sendData(_colorToHex(_currentColor));
                 }
               });
             },
@@ -69,8 +72,7 @@ class _DataViewState extends State<DataView> {
                 final bluetoothService =
                     Provider.of<BluetoothService>(context, listen: false);
                 if (bluetoothService.isConnected) {
-                  bluetoothService.sendData(
-                      _currentColor.value.toRadixString(16).padLeft(8, '0'));
+                  bluetoothService.sendData(_colorToHex(_currentColor));
                 }
                 Navigator.of(context).pop();
               },
