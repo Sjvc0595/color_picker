@@ -37,48 +37,50 @@ class _DataViewState extends State<DataView> {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: const Text('Selecciona un color'),
-          content: ColorPicker(
-            pickerColor: _currentColor,
-            hexInputBar: true,
-            labelTypes: const [ColorLabelType.rgb, ColorLabelType.hex],
-            enableAlpha: false,
-            onColorChanged: (color) {
-              setState(() {
-                _currentColor = color;
-              });
+        return SingleChildScrollView(
+          child: AlertDialog(
+            title: const Text('Selecciona un color'),
+            content: ColorPicker(
+              pickerColor: _currentColor,
+              hexInputBar: true,
+              labelTypes: const [ColorLabelType.rgb, ColorLabelType.hex],
+              enableAlpha: false,
+              onColorChanged: (color) {
+                setState(() {
+                  _currentColor = color;
+                });
 
-              if (_debounce?.isActive ?? false) _debounce!.cancel();
-              _debounce = Timer(const Duration(milliseconds: 300), () {
-                final bluetoothService =
-                    Provider.of<BluetoothService>(context, listen: false);
-                if (bluetoothService.isConnected) {
-                  bluetoothService.sendData(_colorToHex(_currentColor));
-                }
-              });
-            },
-            pickerAreaHeightPercent: 0.8,
+                if (_debounce?.isActive ?? false) _debounce!.cancel();
+                _debounce = Timer(const Duration(milliseconds: 300), () {
+                  final bluetoothService =
+                      Provider.of<BluetoothService>(context, listen: false);
+                  if (bluetoothService.isConnected) {
+                    bluetoothService.sendData(_colorToHex(_currentColor));
+                  }
+                });
+              },
+              pickerAreaHeightPercent: 0.8,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () {
+                  final bluetoothService =
+                      Provider.of<BluetoothService>(context, listen: false);
+                  if (bluetoothService.isConnected) {
+                    bluetoothService.sendData(_colorToHex(_currentColor));
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Aceptar'),
+              ),
+            ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () {
-                final bluetoothService =
-                    Provider.of<BluetoothService>(context, listen: false);
-                if (bluetoothService.isConnected) {
-                  bluetoothService.sendData(_colorToHex(_currentColor));
-                }
-                Navigator.of(context).pop();
-              },
-              child: const Text('Aceptar'),
-            ),
-          ],
         );
       },
     );
@@ -113,47 +115,49 @@ class _DataViewState extends State<DataView> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text(bluetoothService.isConnected
-                ? "Estás conectado"
-                : "No estás conectado"),
-            const Text('Data View'),
-            const Text("Color elegido:"),
-            SizedBox(
-              width: 300,
-              height: 300,
-              child: Container(
-                color: _currentColor,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              Text(bluetoothService.isConnected
+                  ? "Estás conectado"
+                  : "No estás conectado"),
+              const Text('Data View'),
+              const Text("Color elegido:"),
+              SizedBox(
+                width: 300,
+                height: 300,
+                child: Container(
+                  color: _currentColor,
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: _selectColor,
-              child: const Text("Selecciona un color nuevo"),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    if (bluetoothService.isConnected) {
-                      bluetoothService.sendData("1");
-                    }
-                  },
-                  child: const Text("Encender"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (bluetoothService.isConnected) {
-                      bluetoothService.sendData("0");
-                    }
-                  },
-                  child: const Text("Apagar"),
-                ),
-              ],
-            ),
-          ],
+              ElevatedButton(
+                onPressed: _selectColor,
+                child: const Text("Selecciona un color nuevo"),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      if (bluetoothService.isConnected) {
+                        bluetoothService.sendData("1");
+                      }
+                    },
+                    child: const Text("Encender"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (bluetoothService.isConnected) {
+                        bluetoothService.sendData("0");
+                      }
+                    },
+                    child: const Text("Apagar"),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
