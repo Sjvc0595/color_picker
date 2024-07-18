@@ -70,6 +70,14 @@ class GlobalThemeData {
     labelLarge: GoogleFonts.robotoCondensed(
       textStyle: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
     ),
+    // For dropdown menu
+    titleMedium: GoogleFonts.leagueGothic(
+      textStyle: const TextStyle(fontSize: 16.0),
+    ),
+    // For labels
+    bodyLarge: GoogleFonts.leagueGothic(
+      textStyle: const TextStyle(fontSize: 24.0),
+    ),
     bodyMedium: GoogleFonts.robotoCondensed(
       textStyle: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
     ),
