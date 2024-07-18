@@ -62,7 +62,10 @@ class _BluetoothSettingsViewState extends State<BluetoothSettingsView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bluetooth Settings'),
+        title: const Text(
+          'Bluetooth Settings',
+          style: TextStyle(fontSize: 36),
+        ),
       ),
       body: _isEverythingGranted
           ? !bluetoothService.isBluetoothAvailable
