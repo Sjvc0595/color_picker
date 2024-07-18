@@ -85,12 +85,52 @@ class _NoPermissions extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('No se han concedido todos los permisos'),
-          ElevatedButton(
-            onPressed: () {
-              openAppSettings();
-            },
-            child: const Text('Abrir ajustes de la aplicación'),
+          // Padding(
+          //   padding: const EdgeInsets.all(10),
+          //   child: Text('El Bluetooth no está encendido',
+          //       style: Theme.of(context).textTheme.bodyMedium),
+          // ),
+          // Padding(
+          //         padding: const EdgeInsets.all(20),
+          //         child: ElevatedButton(
+          //           style: ElevatedButton.styleFrom(
+          //             minimumSize: const Size(333, 0),
+          //             padding: const EdgeInsets.symmetric(vertical: 8),
+          //             backgroundColor: Theme.of(context).colorScheme.error,
+          //           ),
+          //           onPressed: () async {
+          //             await bluetoothService.disconnect();
+          //           },
+          //           child: Text(
+          //             "Desconectar",
+          //             style: TextStyle(
+          //               color: Theme.of(context).colorScheme.onError,
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              'No se han concedido todos los permisos',
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(333, 0),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              onPressed: () {
+                openAppSettings();
+              },
+              child: const Text('Abrir ajustes de la aplicación'),
+            ),
           ),
         ],
       ),
@@ -143,6 +183,9 @@ class _DevicesList extends StatelessWidget {
                       minimumSize: const Size(333, 0),
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       backgroundColor: Theme.of(context).colorScheme.error,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                     ),
                     onPressed: () async {
                       await bluetoothService.disconnect();
@@ -231,6 +274,9 @@ class _BluetoothOff extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(333, 0),
                 padding: const EdgeInsets.symmetric(vertical: 8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
               ),
               onPressed: () async {
                 await bluetoothService.enableBluetooth();
