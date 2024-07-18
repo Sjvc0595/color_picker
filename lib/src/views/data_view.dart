@@ -134,6 +134,23 @@ class _DataViewState extends State<DataView> {
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                 ),
+                RichText(
+                    text: TextSpan(
+                  text: "Conexión: ",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  children: [
+                    TextSpan(
+                      text: bluetoothService.isConnected
+                          ? "Estás conectado"
+                          : "No estás conectado",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: bluetoothService.isConnected
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.error,
+                          ),
+                    ),
+                  ],
+                )),
                 Text(bluetoothService.isConnected
                     ? "Estás conectado"
                     : "No estás conectado"),
