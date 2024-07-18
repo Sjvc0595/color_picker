@@ -119,9 +119,19 @@ class _DataViewState extends State<DataView> {
         child: Center(
           child: Column(
             children: [
-              Text(
-                "COLOR PICKER",
-                style: Theme.of(context).textTheme.displaySmall,
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.primary,
+                    width: 4,
+                  ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
+                  "COLOR PICKER",
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
               ),
               Text(bluetoothService.isConnected
                   ? "Estás conectado"
