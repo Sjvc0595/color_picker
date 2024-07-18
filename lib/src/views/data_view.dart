@@ -98,7 +98,6 @@ class _DataViewState extends State<DataView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Data'),
         actions: [
           IconButton(
             icon: const Icon(Icons.bluetooth),
@@ -115,65 +114,67 @@ class _DataViewState extends State<DataView> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: 4,
+      body: Padding(
+        padding: const EdgeInsets.all(30.0),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 4,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Text(
-                  "COLOR PICKER",
-                  style: Theme.of(context).textTheme.displaySmall,
-                ),
-              ),
-              Text(bluetoothService.isConnected
-                  ? "Estás conectado"
-                  : "No estás conectado"),
-              const Text('Data View'),
-              Text(
-                "Color elegido:",
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              SizedBox(
-                width: 300,
-                height: 300,
-                child: Container(
-                  color: _currentColor,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: _selectColor,
-                child: const Text("Selecciona un color nuevo"),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      if (bluetoothService.isConnected) {
-                        bluetoothService.sendData("1");
-                      }
-                    },
-                    child: const Text("Encender"),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    "COLOR PICKER",
+                    style: Theme.of(context).textTheme.displaySmall,
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (bluetoothService.isConnected) {
-                        bluetoothService.sendData("0");
-                      }
-                    },
-                    child: const Text("Apagar"),
+                ),
+                Text(bluetoothService.isConnected
+                    ? "Estás conectado"
+                    : "No estás conectado"),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primary,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Text(
+                      "Color elegido:",
+                      style:
+                          Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                    ),
                   ),
-                ],
-              ),
-            ],
+                ),
+                SizedBox(
+                  width: 210,
+                  height: 210,
+                  child: Container(
+                    color: _currentColor,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: _selectColor,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                  ),
+                  child: Text(
+                    "Selecciona un color nuevo",
+                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
