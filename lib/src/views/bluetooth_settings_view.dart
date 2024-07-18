@@ -85,30 +85,6 @@ class _NoPermissions extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.all(10),
-          //   child: Text('El Bluetooth no está encendido',
-          //       style: Theme.of(context).textTheme.bodyMedium),
-          // ),
-          // Padding(
-          //         padding: const EdgeInsets.all(20),
-          //         child: ElevatedButton(
-          //           style: ElevatedButton.styleFrom(
-          //             minimumSize: const Size(333, 0),
-          //             padding: const EdgeInsets.symmetric(vertical: 8),
-          //             backgroundColor: Theme.of(context).colorScheme.error,
-          //           ),
-          //           onPressed: () async {
-          //             await bluetoothService.disconnect();
-          //           },
-          //           child: Text(
-          //             "Desconectar",
-          //             style: TextStyle(
-          //               color: Theme.of(context).colorScheme.onError,
-          //             ),
-          //           ),
-          //         ),
-          //       ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
