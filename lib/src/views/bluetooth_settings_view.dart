@@ -115,13 +115,45 @@ class _DevicesList extends StatelessWidget {
           if (bluetoothService.isConnected)
             Column(
               children: [
-                Text(
-                    "Conectado a: ${bluetoothService.connectedDevice?.name ?? bluetoothService.connectedDevice?.address}"),
-                ElevatedButton(
-                  onPressed: () async {
-                    await bluetoothService.disconnect();
-                  },
-                  child: const Text("Desconectar"),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Conectado a: ",
+                      style: Theme.of(context).textTheme.headlineSmall,
+                      children: [
+                        TextSpan(
+                          text: bluetoothService.connectedDevice?.name ??
+                              bluetoothService.connectedDevice?.address,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(333, 0),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      backgroundColor: Theme.of(context).colorScheme.error,
+                    ),
+                    onPressed: () async {
+                      await bluetoothService.disconnect();
+                    },
+                    child: Text(
+                      "Desconectar",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onError,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
