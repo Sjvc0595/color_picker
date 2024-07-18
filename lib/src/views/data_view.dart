@@ -181,10 +181,14 @@ class _DataViewState extends State<DataView> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
+                  child: Container(
                     width: 210,
                     height: 210,
-                    child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 2,
+                      ),
                       color: _currentColor,
                     ),
                   ),
