@@ -4,6 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
+import 'theme/global_theme_data.dart';
+
 import 'views/data_view.dart';
 import 'views/bluetooth_settings_view.dart';
 
@@ -56,8 +58,8 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
+          theme: GlobalThemeData.lightThemeData,
+          darkTheme: GlobalThemeData.darkThemeData,
           themeMode: settingsController.themeMode,
 
           debugShowCheckedModeBanner: false,
