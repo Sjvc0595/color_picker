@@ -119,11 +119,18 @@ class _DataViewState extends State<DataView> {
         child: Center(
           child: Column(
             children: [
+              Text(
+                "COLOR PICKER",
+                style: Theme.of(context).textTheme.displaySmall,
+              ),
               Text(bluetoothService.isConnected
                   ? "Estás conectado"
                   : "No estás conectado"),
               const Text('Data View'),
-              const Text("Color elegido:"),
+              Text(
+                "Color elegido:",
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
               SizedBox(
                 width: 300,
                 height: 300,

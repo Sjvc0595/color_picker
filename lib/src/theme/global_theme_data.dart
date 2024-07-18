@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GlobalThemeData {
   static final Color _lightFocusColor = Colors.black.withOpacity(0.12);
@@ -7,20 +8,24 @@ class GlobalThemeData {
   static ThemeData lightThemeData = themeData(
     lightColorScheme,
     _lightFocusColor,
+    textTheme,
   );
 
   static ThemeData darkThemeData = themeData(
     darkColorScheme,
     _darkFocusColor,
+    textTheme,
   );
 
-  static ThemeData themeData(ColorScheme colorScheme, Color focusColor) {
+  static ThemeData themeData(
+      ColorScheme colorScheme, Color focusColor, TextTheme textTheme) {
     return ThemeData(
       colorScheme: colorScheme,
       canvasColor: colorScheme.surface,
       scaffoldBackgroundColor: colorScheme.surface,
       highlightColor: Colors.transparent,
       focusColor: focusColor,
+      textTheme: textTheme,
     );
   }
 
@@ -52,5 +57,21 @@ class GlobalThemeData {
     background: Color(0xFF06152A),
     onBackground: Color(0xFFEDF2F8),
     brightness: Brightness.dark,
+  );
+
+  // Text theme
+  static TextTheme textTheme = GoogleFonts.leagueGothicTextTheme().copyWith(
+    displaySmall: GoogleFonts.leagueGothic(
+      textStyle: const TextStyle(fontSize: 36.0),
+    ),
+    headlineSmall: GoogleFonts.leagueGothic(
+      textStyle: const TextStyle(fontSize: 24.0),
+    ),
+    labelLarge: GoogleFonts.robotoCondensed(
+      textStyle: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+    ),
+    bodyMedium: GoogleFonts.robotoCondensed(
+      textStyle: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
+    ),
   );
 }
