@@ -73,5 +73,8 @@ class GlobalThemeData {
     bodyMedium: GoogleFonts.robotoCondensed(
       textStyle: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w400),
     ),
+    bodySmall: GoogleFonts.robotoCondensed(
+      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+    ),
   );
 }
