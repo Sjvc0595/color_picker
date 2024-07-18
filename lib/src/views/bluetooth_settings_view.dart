@@ -168,14 +168,32 @@ class _BluetoothOff extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('El Bluetooth no está encendido'),
-          const Icon(Icons.bluetooth_disabled),
-          ElevatedButton(
-            onPressed: () async {
-              await bluetoothService.enableBluetooth();
-            },
-            child: const Text("Encender Bluetooth"),
+          const Padding(
+            padding: EdgeInsets.all(10),
+            child: Icon(
+              Icons.bluetooth_disabled,
+              size: 165,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text('El Bluetooth no está encendido',
+                style: Theme.of(context).textTheme.bodyMedium),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(40),
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(333, 0),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+              ),
+              onPressed: () async {
+                await bluetoothService.enableBluetooth();
+              },
+              child: const Text("Encender Bluetooth"),
+            ),
           )
         ],
       ),
