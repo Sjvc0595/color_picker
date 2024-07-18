@@ -120,74 +120,88 @@ class _DataViewState extends State<DataView> {
           child: Center(
             child: Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: 4,
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
-                    "COLOR PICKER",
-                    style: Theme.of(context).textTheme.displaySmall,
-                  ),
-                ),
-                RichText(
-                    text: TextSpan(
-                  text: "Conexión: ",
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  children: [
-                    TextSpan(
-                      text: bluetoothService.isConnected
-                          ? "Estás conectado"
-                          : "No estás conectado",
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: bluetoothService.isConnected
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.error,
-                          ),
-                    ),
-                  ],
-                )),
-                Text(bluetoothService.isConnected
-                    ? "Estás conectado"
-                    : "No estás conectado"),
-                Align(
-                  alignment: Alignment.centerLeft,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 18.0),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 4,
+                      ),
                       borderRadius: BorderRadius.circular(15),
                     ),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
-                      "Color elegido:",
-                      style:
-                          Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              ),
+                      "COLOR PICKER",
+                      style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: 210,
-                  height: 210,
-                  child: Container(
-                    color: _currentColor,
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: RichText(
+                      text: TextSpan(
+                    text: "Conexión: ",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                    children: [
+                      TextSpan(
+                        text: bluetoothService.isConnected
+                            ? "Estás conectado"
+                            : "No estás conectado",
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: bluetoothService.isConnected
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.error,
+                            ),
+                      ),
+                    ],
+                  )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 6.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text(
+                        "Color elegido:",
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                      ),
+                    ),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: _selectColor,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 210,
+                    height: 210,
+                    child: Container(
+                      color: _currentColor,
+                    ),
                   ),
-                  child: Text(
-                    "Selecciona un color nuevo",
-                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 30.0),
+                  child: ElevatedButton(
+                    onPressed: _selectColor,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                    child: Text(
+                      "Selecciona un color nuevo",
+                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.onSecondary,
+                          ),
+                    ),
                   ),
                 ),
               ],
