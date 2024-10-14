@@ -1,30 +1,45 @@
-# color_picker
+# Color Picker
 
-A new Flutter project.
+<!-- ![Color Picker Logo](path_to_your_logo_image) -->
 
-## Getting Started
 
-This project is a starting point for a Flutter application that follows the
-[simple app state management
-tutorial](https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple).
+**Color Picker** is a mobile application that communicates with an **Arduino UNO** via **Bluetooth** to control an **RGB LED**. The app allows users to select colors directly from their mobile device and sends the corresponding values to the Arduino, adjusting the LED color in real-time.
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Table of Contents
 
-## Assets
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Setup Steps](#setup-steps)
+- [Usage](#usage)
+- [Screenshots](#screenshots)
+- [Future Improvements](#future-improvements)
+- [Contributing](#contributing)
+- [License](#license)
 
-The `assets` directory houses images, fonts, and any other files you want to
-include with your application.
+## Features
 
-The `assets/images` directory contains [resolution-aware
-images](https://flutter.dev/docs/development/ui/assets-and-images#resolution-aware).
+- Choose colors from the mobile app to change the color of an RGB LED.
+- Real-time communication with an Arduino UNO via Bluetooth.
+- Simple interface for visualizing and selecting colors.
 
-## Localization
+## Technologies Used
 
-This project generates localized messages based on arb files found in
-the `lib/src/localization` directory.
+- **Flutter**: Mobile app development.
+- **Dart**: Programming language for the app.
+- **Arduino**: Receives color values and controls the LED.
+- **Bluetooth**: Wireless communication between the app and Arduino.
+- **RGB LED**: Displays the selected colors.
 
-To support additional languages, please visit the tutorial on
-[Internationalizing Flutter
-apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
+## Installation
+
+### Requirements
+
+- **Arduino UNO**
+- **HC-05 Bluetooth Module**
+- **RGB LED** and resistors
+- **USB cable** to connect Arduino to your computer
+- **Color Picker Mobile App** 
+
+### Setup Steps
