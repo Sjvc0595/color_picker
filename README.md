@@ -1,6 +1,6 @@
 # Color Picker
 
-<img src="assets/icon/icon_simple.png" alt="Color Picker Logo" width="200" height="200" />
+<img src="assets/icon/icon_simple.png" alt="Color Picker Logo" width="200" />
 
 **Color Picker** is a mobile application that communicates with an **Arduino UNO** via **Bluetooth** to control an **RGB LED**. The app allows users to select colors directly from their mobile device and sends the corresponding values to the Arduino, adjusting the LED color in real-time.
 
@@ -42,3 +42,7 @@
 - **Color Picker Mobile App** 
 
 ### Setup Steps
+  - Build the following circuit using the Arduini UNO, the HC-05 module and the RGB LED
+  <img src="circuit/circuit.png" alt="Color Picker Circuit" width="400"/>
+    
+  - Upload the script in the /arduino/color_pickeer/color_picker.ino to the *Arduino UNO*
