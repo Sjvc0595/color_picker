@@ -1,7 +1,6 @@
 # Color Picker
 
-<!-- ![Color Picker Logo](path_to_your_logo_image) -->
-
+<img src="assets/icon/icon_simple.png" alt="Color Picker Logo" width="200" height="200" />
 
 **Color Picker** is a mobile application that communicates with an **Arduino UNO** via **Bluetooth** to control an **RGB LED**. The app allows users to select colors directly from their mobile device and sends the corresponding values to the Arduino, adjusting the LED color in real-time.
 
