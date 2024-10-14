@@ -11,9 +11,7 @@
 - [Installation](#installation)
   - [Requirements](#requirements)
   - [Setup Steps](#setup-steps)
-- [Usage](#usage)
 - [Screenshots](#screenshots)
-- [Future Improvements](#future-improvements)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -46,3 +44,16 @@
   <img src="circuit/circuit.png" alt="Color Picker Circuit" width="400"/>
     
   - Upload the script in the /arduino/color_pickeer/color_picker.ino to the *Arduino UNO*
+  - Download the Flutter app, built based on the code in the present repository
+  - Connect the phone with the HC-05 module and send the colors you desire!
+## Screenshots
+
+<div style="display: flex; gap: 10px;">
+    <img src="screenshots/DataView.jpeg" alt="Main Screen" width="200" />
+    <img src="screenshots/SelectColor.jpeg" alt="Select Color" width="200" />
+    <img src="screenshots/BluetoothSettings.jpeg" alt="Bluetooth Settings" width="200" />
+</div>
+
+## Contributing
+We welcome contributions to this project! Feel free to fork the repository and submit pull requests. Don’t hesitate to report issues or suggest improvements through the Issues section.
+## License
