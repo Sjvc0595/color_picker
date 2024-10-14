@@ -57,3 +57,4 @@
 ## Contributing
 We welcome contributions to this project! Feel free to fork the repository and submit pull requests. Don’t hesitate to report issues or suggest improvements through the Issues section.
 ## License
+GNU Affero General Public License v3.0
