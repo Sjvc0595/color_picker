@@ -8,19 +8,22 @@ class BluetoothService extends ChangeNotifier {
   // Instance of FlutterBluetoothSerial
   final _flutterBluetooth = FlutterBluetoothSerial.instance;
 
-  BluetoothState _bluetoothState = BluetoothState.UNKNOWN;
-  BluetoothConnection? _bluetoothConnection;
-  bool _isConnected = false;
-  bool _isConnecting = false;
-  List<BluetoothDevice> _devicesList = [];
-  BluetoothDevice? _connectedDevice;
+  BluetoothState _bluetoothState = BluetoothState.UNKNOWN; // Bluetooth state
+  BluetoothConnection? _bluetoothConnection; // Bluetooth connection
+  bool _isConnected = false; // Is connected to a device
+  bool _isConnecting = false; // Is connecting to a device
+  List<BluetoothDevice> _devicesList = []; // List of paired devices
+  BluetoothDevice? _connectedDevice; // Connected device
 
+  // Constructor
   BluetoothService() {
+    // Get the current Bluetooth state
     _flutterBluetooth.state.then((value) {
       _bluetoothState = value;
       notifyListeners();
     });
 
+    // Listen to Bluetooth state changes
     _flutterBluetooth.onStateChanged().listen((BluetoothState state) {
       _bluetoothState = state;
       notifyListeners();
@@ -35,6 +38,8 @@ class BluetoothService extends ChangeNotifier {
   bool get isConnecting => _isConnecting;
   BluetoothDevice? get connectedDevice => _connectedDevice;
 
+  // Methods
+  // Discover devices
   Future<void> discoverDevices() async {
     try {
       List<BluetoothDevice> devices =
@@ -46,6 +51,7 @@ class BluetoothService extends ChangeNotifier {
     }
   }
 
+  // Connect to a device
   Future<void> connect(BluetoothDevice device) async {
     _isConnecting = true;
     notifyListeners();
@@ -65,6 +71,7 @@ class BluetoothService extends ChangeNotifier {
     }
   }
 
+  // Disconnect from a device
   Future<void> disconnect() async {
     try {
       await _bluetoothConnection?.close();
@@ -75,6 +82,7 @@ class BluetoothService extends ChangeNotifier {
     }
   }
 
+  // Send data to the connected device
   void sendData(String data) {
     if (_bluetoothConnection != null) {
       _bluetoothConnection!.output
@@ -82,6 +90,7 @@ class BluetoothService extends ChangeNotifier {
     }
   }
 
+  // Handle incoming data
   void _handleIncomingData() {
     _bluetoothConnection!.input!.listen((data) {
       // ignore: unused_local_variable
@@ -92,6 +101,7 @@ class BluetoothService extends ChangeNotifier {
     });
   }
 
+  // Enable Bluetooth
   Future<void> enableBluetooth() async {
     try {
       await _flutterBluetooth.requestEnable();

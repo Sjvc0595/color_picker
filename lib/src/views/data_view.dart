@@ -19,6 +19,7 @@ class DataView extends StatefulWidget {
 }
 
 class _DataViewState extends State<DataView> {
+  // Requesting permissions
   void _requestPermission() async {
     await Permission.location.request();
     await Permission.bluetooth.request();
@@ -26,13 +27,15 @@ class _DataViewState extends State<DataView> {
     await Permission.bluetoothConnect.request();
   }
 
-  Color _currentColor = Colors.blue;
-  Timer? _debounce;
+  Color _currentColor = Colors.blue; // Default color
+  Timer? _debounce; // Debounce timer
 
+  // Convert a Color object to a hexadecimal string
   String _colorToHex(Color color) {
     return color.value.toRadixString(16).padLeft(8, '0').substring(2);
   }
 
+  // Show a color picker dialog
   void _selectColor() {
     showDialog(
       context: context,
@@ -45,6 +48,7 @@ class _DataViewState extends State<DataView> {
               hexInputBar: true,
               labelTypes: const [ColorLabelType.rgb, ColorLabelType.hex],
               enableAlpha: false,
+              // Update the current color when it changes
               onColorChanged: (color) {
                 setState(() {
                   _currentColor = color;
@@ -69,6 +73,7 @@ class _DataViewState extends State<DataView> {
                 child: const Text('Cancelar'),
               ),
               TextButton(
+                // Send the selected color to the device
                 onPressed: () {
                   final bluetoothService =
                       Provider.of<BluetoothService>(context, listen: false);
@@ -120,6 +125,7 @@ class _DataViewState extends State<DataView> {
           child: Center(
             child: Column(
               children: [
+                // Title
                 Padding(
                   padding: const EdgeInsets.only(bottom: 18.0),
                   child: Container(
@@ -137,6 +143,7 @@ class _DataViewState extends State<DataView> {
                     ),
                   ),
                 ),
+                // Display the connection status
                 Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: RichText(
@@ -157,6 +164,7 @@ class _DataViewState extends State<DataView> {
                     ],
                   )),
                 ),
+                // Display the selected color
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6.0),
                   child: Align(
@@ -179,6 +187,7 @@ class _DataViewState extends State<DataView> {
                     ),
                   ),
                 ),
+                // Display the color preview
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -193,6 +202,7 @@ class _DataViewState extends State<DataView> {
                     ),
                   ),
                 ),
+                // Button to open the color picker dialog
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 30.0),
                   child: ElevatedButton(

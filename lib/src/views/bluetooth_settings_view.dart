@@ -67,6 +67,7 @@ class _BluetoothSettingsViewState extends State<BluetoothSettingsView> {
           style: TextStyle(fontSize: 36),
         ),
       ),
+      // Displaying different widgets based on permissions status
       body: _isEverythingGranted
           ? !bluetoothService.isBluetoothAvailable
               ? _BluetoothOff(bluetoothService: bluetoothService)
@@ -92,6 +93,8 @@ class _NoPermissions extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
+
+          // Button to open app settings
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: ElevatedButton(
@@ -127,7 +130,9 @@ class _DevicesList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       child: Column(
         children: [
+          // Displaying progress indicator while connecting
           if (bluetoothService.isConnecting) const LinearProgressIndicator(),
+          // Displaying connected device information
           if (bluetoothService.isConnected)
             Column(
               children: [
@@ -152,6 +157,8 @@ class _DevicesList extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                // Button to disconnect
                 Padding(
                   padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
@@ -176,6 +183,7 @@ class _DevicesList extends StatelessWidget {
                 ),
               ],
             ),
+          // Displaying list of available devices
           if (!bluetoothService.isConnected)
             Expanded(
               child: RefreshIndicator(
@@ -219,6 +227,7 @@ class _DevicesList extends StatelessWidget {
   }
 }
 
+// Widget to display when Bluetooth is off
 class _BluetoothOff extends StatelessWidget {
   const _BluetoothOff({
     required this.bluetoothService,
